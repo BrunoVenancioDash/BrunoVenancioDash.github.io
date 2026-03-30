@@ -1,2 +1,0 @@
-# BrunoVenancioDash.github.io
-myFirstSite
