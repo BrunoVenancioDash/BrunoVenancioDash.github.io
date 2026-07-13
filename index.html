@@ -1,10 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>About — Rafael de Santiago</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rafael de Santiago</title>
+<style>
+  :root{
+    --max-width:820px;--text:#1f2328;--muted:#59636e;--accent:#1a4971;
+    --accent-hover:#0f3556;--border:#e3e6ea;--bg:#fff;--bg-soft:#f6f8fa;
+    --serif:Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--sans);font-size:17px;line-height:1.6;color:var(--text);background:var(--bg)}
+  .wrapper{max-width:var(--max-width);margin:0 auto;padding:0 20px 64px}
+
+  .site-header{padding:40px 0 0;text-align:center}
+  .site-title{font-family:var(--serif);font-size:2rem;font-weight:700;margin:0 0 4px}
+  .site-subtitle{margin:0;color:var(--muted);font-size:.95rem}
+
+  nav.main-nav{margin:22px 0 8px;padding-bottom:18px;border-bottom:1px solid var(--border);text-align:center}
+  nav.main-nav ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 4px}
+  nav.main-nav a{display:inline-block;padding:4px 12px;color:var(--accent);text-decoration:none;font-size:.95rem;border-radius:4px;transition:background .15s,color .15s;cursor:pointer}
+  nav.main-nav a:hover{background:var(--bg-soft)}
+  nav.main-nav a.active{color:var(--text);font-weight:600}
+
+  main{padding-top:34px}
+  .page{display:none}
+  .page.active{display:block}
+  h2.section-title{font-family:var(--serif);font-size:1.5rem;margin:0 0 18px;padding-bottom:6px}
+  a{color:var(--accent)}
+  a:hover{color:var(--accent-hover)}
+
+  .about{display:flex;gap:26px;align-items:flex-start}
+  .about .photo{flex:0 0 170px;width:170px;height:210px;border-radius:6px;object-fit:cover;background:var(--bg-soft);border:1px solid var(--border)}
+  .photo-placeholder{display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.85rem;text-align:center;padding:8px}
+  .about .bio{flex:1 1 auto}
+  .about .bio p:first-child{margin-top:0}
+
+  .info-list{padding-left:18px}
+  .info-list li{margin:4px 0}
+
+  .students-intro{color:var(--muted);margin-bottom:22px}
+  .table-scroll{overflow-x:auto}
+  table.students{width:100%;border-collapse:collapse;font-size:.97rem;margin:0 0 28px}
+  table.students caption{text-align:left;font-weight:600;padding:0 0 8px}
+  table.students th,table.students td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+  table.students thead th{background:var(--bg-soft);border-bottom:2px solid var(--border);font-size:.85rem;text-transform:uppercase;letter-spacing:.4px;color:var(--muted)}
+  table.students tbody tr:hover{background:#fbfcfd}
+  .badge{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.78rem;font-weight:600;white-space:nowrap}
+  .badge.doutorado{background:#e7f0fa;color:#1a4971}
+  .badge.mestrado{background:#eef7ee;color:#2e6b34}
+  .placeholder{background:#fff8e1;border:1px dashed #d9b96b;color:#6b551d;padding:2px 6px;border-radius:3px;font-size:.9em}
+  .count-note{color:var(--muted);font-size:.9rem;margin-top:-12px}
+
+  .pub-year{font-family:var(--serif);font-size:1.15rem;margin:28px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--border)}
+  .pub-list{list-style:none;padding:0;margin:0}
+  .pub-list li{padding:11px 0;border-bottom:1px solid var(--border);font-size:.95rem;line-height:1.5}
+  .pub-list .p-title{font-weight:600}
+  .pub-list .p-venue{color:var(--muted)}
+
+  .course-list{padding-left:18px}
+  .course-list li{margin:7px 0}
+  details.semesters{margin-top:22px}
+  details.semesters summary{cursor:pointer;color:var(--accent);font-weight:600;padding:6px 0}
+  .sem-block h4{font-family:var(--serif);margin:16px 0 4px;font-size:1rem}
+  .sem-block ul{padding-left:18px;margin:4px 0}
+
+  .link-list{padding-left:18px}
+  .link-list li{margin:8px 0}
+
+  footer.site-footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--border);color:var(--muted);font-size:.85rem;text-align:center}
+
+  @media (max-width:560px){
+    body{font-size:16px}
+    .about{flex-direction:column;align-items:center}
+    .about .photo{width:150px;height:185px;flex-basis:auto}
+    .site-title{font-size:1.7rem}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
 </head>
 <body>
   <div class="wrapper">
@@ -16,58 +91,241 @@
 
     <nav class="main-nav">
       <ul>
-        <li><a href="index.html" class="active">About</a></li>
-        <li><a href="research.html">Research</a></li>
-        <li><a href="publications.html">Publications</a></li>
-        <li><a href="teaching.html">Teaching</a></li>
-        <li><a href="students.html">Students</a></li>
-        <li><a href="links.html">Links</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#teaching">Teaching</a></li>
+        <li><a href="#students">Students</a></li>
+        <li><a href="#links">Links</a></li>
       </ul>
     </nav>
 
     <main>
-      <h2 class="section-title">About Me</h2>
 
-      <section class="about">
-        <div class="photo photo-placeholder">
-          Save the photo from<br>his page as <strong>rafael.jpg</strong><br>in this folder
-        </div>
-        <div class="bio">
-          <p>
-            I have been a professor at the Department of Informatics and Statistics (INE)
-            at the Federal University of Santa Catarina (UFSC) since 2018, affiliated with
-            UFSC's Graduate Program in Computer Science (PPGCC). I am currently an Associate
-            Professor at INE/UFSC, where I served as Head of the Department from 2021 to 2025.
-            I also lead the Connectionism and Cognitive Science Laboratory team. I have
-            experience in research and teaching in Computer Science, with an emphasis on
-            Algorithms, Optimization, and Theory of Computation.
-          </p>
-
-          <p><strong>Research interests:</strong> Algorithms, Discrete Optimization, and
-          Theoretical Computer Science.</p>
-
-          <p><strong>Education &amp; experience:</strong></p>
-          <ul class="info-list">
-            <li>Associate Professor — Department of Informatics and Statistics (INE) — UFSC (2018 – present)</li>
-            <li>Head of Department (INE/UFSC) (2021 – 2025)</li>
-            <li>Ph.D. in Computing — Federal University of Rio Grande do Sul (UFRGS) (2017)</li>
-            <li>Master's in Applied Computing — University of Vale do Itajaí (UNIVALI) (2009)</li>
-            <li>Bachelor's in Computer Science — University of Vale do Itajaí (UNIVALI) (2006)</li>
-          </ul>
-
-          <p><strong>Contact:</strong></p>
-          <ul class="info-list">
-            <li><strong>Email:</strong> r.santiago <em>at</em> ufsc.br</li>
-            <li><strong>Office:</strong> INE-412</li>
-            <li><strong>Address:</strong> Campus Universitário Trindade, Florianópolis/SC, Brazil — CEP 88040-900</li>
-            <li><strong>Lattes:</strong> <a href="http://lattes.cnpq.br/5073911182921995">lattes.cnpq.br/5073911182921995</a></li>
-            <li><strong>ORCID:</strong> <a href="https://orcid.org/0000-0001-7033-125X">0000-0001-7033-125X</a></li>
-          </ul>
+      <!-- ================= ABOUT ================= -->
+      <section id="about" class="page">
+        <h2 class="section-title">About Me</h2>
+        <div class="about">
+          <div class="photo photo-placeholder">Save the photo as<br><strong>rafael.jpg</strong><br>in this folder</div>
+          <div class="bio">
+            <p>
+              I have been a professor at the Department of Informatics and Statistics (INE)
+              at the Federal University of Santa Catarina (UFSC) since 2018, affiliated with
+              UFSC's Graduate Program in Computer Science (PPGCC). I am currently an Associate
+              Professor at INE/UFSC, where I served as Head of the Department from 2021 to 2025.
+              I also lead the Connectionism and Cognitive Science Laboratory team. I have
+              experience in research and teaching in Computer Science, with an emphasis on
+              Algorithms, Optimization, and Theory of Computation.
+            </p>
+            <p><strong>Research interests:</strong> Algorithms, Discrete Optimization, and Theoretical Computer Science.</p>
+            <p><strong>Education &amp; experience:</strong></p>
+            <ul class="info-list">
+              <li>Associate Professor — Department of Informatics and Statistics (INE) — UFSC (2018 – present)</li>
+              <li>Head of Department (INE/UFSC) (2021 – 2025)</li>
+              <li>Ph.D. in Computing — Federal University of Rio Grande do Sul (UFRGS) (2017)</li>
+              <li>Master's in Applied Computing — University of Vale do Itajaí (UNIVALI) (2009)</li>
+              <li>Bachelor's in Computer Science — University of Vale do Itajaí (UNIVALI) (2006)</li>
+            </ul>
+            <p><strong>Contact:</strong></p>
+            <ul class="info-list">
+              <li><strong>Email:</strong> r.santiago <em>at</em> ufsc.br</li>
+              <li><strong>Office:</strong> INE-412</li>
+              <li><strong>Address:</strong> Campus Universitário Trindade, Florianópolis/SC, Brazil — CEP 88040-900</li>
+              <li><strong>Lattes:</strong> <a href="http://lattes.cnpq.br/5073911182921995">lattes.cnpq.br/5073911182921995</a></li>
+              <li><strong>ORCID:</strong> <a href="https://orcid.org/0000-0001-7033-125X">0000-0001-7033-125X</a></li>
+            </ul>
+          </div>
         </div>
       </section>
+
+      <!-- ================= RESEARCH ================= -->
+      <section id="research" class="page">
+        <h2 class="section-title">Research</h2>
+        <p>
+          I am interested in Algorithms, Discrete Optimization, and Theoretical Computer
+          Science. My work spans combinatorial optimization, graph and network clustering
+          (modularity and modularity density), neural-symbolic and agent-based systems, and,
+          more recently, quantum computing and machine-learning applications in geophysics.
+        </p>
+        <p>I lead the team of the <strong>Connectionism and Cognitive Science Laboratory</strong>.</p>
+        <p>
+          <strong>Prospective students:</strong> those interested in undergraduate research,
+          an undergraduate thesis, or a Master's or Ph.D. degree are welcome to contact me by
+          email at <em>r.santiago at ufsc.br</em>.
+        </p>
+      </section>
+
+      <!-- ================= PUBLICATIONS ================= -->
+      <section id="publications" class="page">
+        <h2 class="section-title">Published Papers</h2>
+
+        <h3 class="pub-year">2026</h3>
+        <ul class="pub-list">
+          <li>Oliveira, I. E.; de Santiago, R.; Angulo, Y. V. C.; Mazzutti, T.; Rodrigues, B. B.; Roisenberg, M. <span class="p-title">A Conditional GAN Framework for Joint Generative Modeling of Geological Facies and Acoustic Impedance.</span> <span class="p-venue">IJCNN 2026, Maastricht — Proceedings of the IEEE World Congress on Computational Intelligence, 2026.</span></li>
+          <li>Bet, A. J.; de Santiago, R.; Rodrigues, B. B.; Roisenberg, M. <span class="p-title">Joint Seismic Inversion and Wavelet Estimation Using Physics-Informed Neural Networks.</span> <span class="p-venue">IJCNN 2026, Maastricht — Proceedings of the IEEE WCCI, 2026.</span></li>
+          <li>Rosa, E.; Santiago, R. <span class="p-title">Schrödinger's bug: a survey on quantum software debugging.</span> <span class="p-venue">Quantum Information Processing, v.25, p.96, 2026.</span></li>
+          <li>Schreiner, G. A.; de Santiago, R.; Duarte, D.; Mello, R. S. <span class="p-title">An Autonomous Hybrid Data Partitioning Approach for NewSQL Databases.</span> <span class="p-venue">Journal of the Brazilian Computer Society, v.32, p.55–72, 2026.</span></li>
+          <li>Rosa, E.; Lussi, E.; Marchi, J.; de Santiago, R.; Duzzioni, E. <span class="p-title">Full Quantum Stack: Ket Platform.</span> <span class="p-venue">Brazilian Journal of Physics, v.56, p.45, 2026.</span></li>
+        </ul>
+
+        <h3 class="pub-year">2025</h3>
+        <ul class="pub-list">
+          <li>Salvador, T. M.; de Santiago, R.; Castellucci, P. B. <span class="p-title">A Construção de Planos de Empacotamento Retangular Bidimensional com uso do Problema da Mochila.</span> <span class="p-venue">LVII SBPO 2025, Gramado.</span></li>
+          <li>da Rosa, E. C. R.; Marchi, J.; Duzzioni, E. I.; de Santiago, R. <span class="p-title">Quantum Gate Decomposition: A Study of Compilation Time vs. Execution Time Trade-offs.</span> <span class="p-venue">SBLP 2025, Recife, v.29, p.10–18.</span></li>
+          <li>Nascimento, L.; de Santiago, R.; Franco, Á. J. P.; Castellucci, P. B. <span class="p-title">GRASP para Maximização da Modularidade por Densidade com Sinais.</span> <span class="p-venue">X ETC 2025, p.6.</span></li>
+          <li>Rosa, E. C. R.; Duzzioni, E. I.; de Santiago, R. <span class="p-title">Optimizing Gate Decomposition for High-Level Quantum Programming.</span> <span class="p-venue">Quantum, v.9, p.1659, 2025.</span></li>
+          <li>Lussi, E. W.; de Santiago, R.; Duzzioni, E. I. <span class="p-title">Time-optimization framework for the implementation of robust low-latency quantum circuits.</span> <span class="p-venue">Physical Review Applied, v.23, p.044036, 2025.</span></li>
+        </ul>
+
+        <h3 class="pub-year">2024</h3>
+        <ul class="pub-list">
+          <li>Huertas, D. K. N.; de Santiago, R.; Rodrigues, B. B. <span class="p-title">Calibrador para Modelos de Física de Rocha: abordagem metaheurística com alinhamento de estimativas.</span> <span class="p-venue">56° SBPO 2024, Fortaleza, v.56.</span></li>
+          <li>Ataide, W. C.; de Santiago, R.; Franco, Á. J. P. <span class="p-title">Algorithms for Super-coloring in Directed Graphs.</span> <span class="p-venue">56° SBPO 2024, Fortaleza.</span></li>
+          <li>Resmer, J. P. P.; de Santiago, R. <span class="p-title">Aplicação de UNSGA III para Projetos de Redes de Transporte Público Urbano.</span> <span class="p-venue">56° SBPO 2024, Fortaleza.</span></li>
+          <li>Castellucci, P. B.; Franco, Á. J. P.; de Santiago, R. <span class="p-title">Soluções factíveis para o problema do caixeiro viajante com veículo elétrico e janelas de tempo.</span> <span class="p-venue">IX ETC 2024, p.114.</span></li>
+          <li>de Mello, R. R. P.; de Santiago, R.; Silveira, R. A.; Gelaim, T. Â. <span class="p-title">Neural-symbolic BDI-Agent as a Multi-Context System: A case study with negotiating agent.</span> <span class="p-venue">Expert Systems with Applications, v.238, p.121656, 2024.</span></li>
+        </ul>
+
+        <h3 class="pub-year">2022</h3>
+        <ul class="pub-list">
+          <li>da Rosa, E. C. R.; de Santiago, R. <span class="p-title">Ket Quantum Programming.</span> <span class="p-venue">ACM Journal on Emerging Technologies in Computing Systems, v.18, p.1–25, 2022.</span></li>
+          <li>Rodrigues, R.; Silveira, R.; de Santiago, R. <span class="p-title">A Mediator Agent based on Multi-Context System and Information Retrieval.</span> <span class="p-venue">ICAART 2022, p.78.</span></li>
+        </ul>
+
+        <h3 class="pub-year">2021</h3>
+        <ul class="pub-list">
+          <li>Pires, O. M.; de Santiago, R.; Marchi, J. <span class="p-title">Two Stage Quantum Optimization for the School Timetabling Problem.</span> <span class="p-venue">IEEE CEC 2021, Kraków, p.2347–2353.</span></li>
+          <li>Menegasso Pires, O.; Duzzioni, E. I.; Marchi, J.; de Santiago, R. <span class="p-title">Quantum Circuit Synthesis Using Projective Simulation.</span> <span class="p-venue">Inteligencia Artificial, v.24, p.90–101, 2021.</span></li>
+          <li>Herchonvicz, A. L.; de Santiago, R. <span class="p-title">Deep Neural Network Architectures for Speech Deception Detection: A Brief Survey.</span> <span class="p-venue">EPIA 2021, LNCS v.12981, p.301–312.</span></li>
+          <li>Rodrigues, R.; Silveira, R. A.; Santiago, R. <span class="p-title">Integrating neural networks into the agent's decision-making: A Systematic Literature Mapping.</span> <span class="p-venue">WESAAC 2021, Rio de Janeiro.</span></li>
+          <li>Santos, Y. S. R. N.; Santiago, R.; Perego, R.; Schaly, M. H.; Alvares, L. O.; Bogorny, V. <span class="p-title">A Co-occurrence Based Approach for Mining Overlapped Co-clusters in Binary Data.</span> <span class="p-venue">BRACIS 2021, LNCS v.13073.</span></li>
+        </ul>
+
+        <h3 class="pub-year">2020</h3>
+        <ul class="pub-list">
+          <li>Marcolla, F.; de Santiago, R.; Dazzi, R. <span class="p-title">Novel Lie Speech Classification by using Voice Stress.</span> <span class="p-venue">ICAART 2020, Valletta, p.742.</span></li>
+          <li>de Santiago, R.; Lamb, L. C. <span class="p-title">A ground truth contest between modularity maximization and modularity density maximization.</span> <span class="p-venue">Artificial Intelligence Review, v.1, p.1, 2020.</span></li>
+        </ul>
+
+        <h3 class="pub-year">2019</h3>
+        <ul class="pub-list">
+          <li>Santiago, R.; Lamb, L.; Concatto, F. <span class="p-title">On the Role of Central Individuals in Influence Propagation.</span> <span class="p-venue">ICAART 2019, Prague, v.2, p.103.</span></li>
+        </ul>
+
+        <h3 class="pub-year">2018</h3>
+        <ul class="pub-list">
+          <li>Martins, W. H.; Souza Alves de Santiago, L. H.; de Santiago, R.; Lamb, L. <span class="p-title">Effective Ant Colony Optimization Solution for the Brazilian Family Health Team Scheduling Problem.</span> <span class="p-venue">IEEE ICTAI 2018, Volos, p.493.</span></li>
+          <li>Mendes, R. F. S.; Concatto, F.; Santiago, R. <span class="p-title">Desenvolvimento de um Modelo Exato de Alocação de Disciplinas no Contexto de um Curso de Graduação.</span> <span class="p-venue">50° SBPO 2018, Rio de Janeiro.</span></li>
+          <li>Mendes, R. F. S.; Santiago, R.; Lamb, L. C. <span class="p-title">Novel Parallel Anytime A* for Graph and Network Clustering.</span> <span class="p-venue">IEEE CEC 2018, Rio de Janeiro.</span></li>
+        </ul>
+
+        <h3 class="pub-year">2017</h3>
+        <ul class="pub-list">
+          <li>Schmitt, R.; Ramos, P.; Santiago, R.; Lamb, L. C. <span class="p-title">Novel Clique enumeration heuristic for detecting overlapping clusters.</span> <span class="p-venue">IEEE CEC 2017, Donostia, p.1390.</span></li>
+          <li>Concatto, F.; Zunino, W.; Giancoli, L. A.; Santiago, R.; Lamb, L. C. <span class="p-title">Genetic algorithm for epidemic mitigation by removing relationships.</span> <span class="p-venue">GECCO 2017, Berlin, p.761.</span></li>
+          <li>Santiago, R.; Lamb, L. C. <span class="p-title">Exact computational solution of Modularity Density Maximization by effective column generation.</span> <span class="p-venue">Computers &amp; Operations Research, v.86, p.18–29, 2017.</span></li>
+          <li>Santiago, R.; Lamb, L. C. <span class="p-title">Efficient modularity density heuristics for large graphs.</span> <span class="p-venue">European Journal of Operational Research, v.258, p.844–865, 2017.</span></li>
+        </ul>
+
+        <h3 class="pub-year">2016</h3>
+        <ul class="pub-list">
+          <li>Santiago, R.; Zunino, W.; Concatto, F.; Lamb, L. C. <span class="p-title">A New Model and Heuristic for Infection Minimization by Cutting Relationships.</span> <span class="p-venue">ICONIP 2016, Kyoto.</span></li>
+          <li>Santiago, R.; Lamb, L. C. <span class="p-title">On the Role of Degree Influence in Suboptimal Modularity Maximization.</span> <span class="p-venue">IEEE CEC 2016, Vancouver, p.4618–4625.</span></li>
+        </ul>
+      </section>
+
+      <!-- ================= TEACHING ================= -->
+      <section id="teaching" class="page">
+        <h2 class="section-title">Teaching</h2>
+        <p><strong>Current courses (2025/2):</strong></p>
+        <ul class="course-list">
+          <li>INE410113 — Theory of Computation</li>
+          <li>INE5413 — Graphs</li>
+        </ul>
+        <p><strong>Course materials (annotated PDFs):</strong></p>
+        <ul class="course-list">
+          <li>INE410113 — Theory of Computation (<a href="http://www.inf.ufsc.br/~r.santiago/downloads/INE410113.pdf">PDF</a>)</li>
+          <li>INE410104 — Design and Analysis of Algorithms (<a href="http://www.inf.ufsc.br/~r.santiago/downloads/INE410104.pdf">PDF</a>)</li>
+          <li>INE5413 — Graphs (<a href="http://www.inf.ufsc.br/~r.santiago/downloads/INE5413.pdf">PDF</a>)</li>
+          <li>INE5622 — Introduction to Compilers (<a href="http://www.inf.ufsc.br/~r.santiago/downloads/INE5622.pdf">PDF</a>)</li>
+          <li>Extension course — Best Practices in Algorithms for Programmers (<a href="http://www.inf.ufsc.br/~r.santiago/downloads/BoasAlg.pdf">PDF</a>)</li>
+          <li>INE5201 — Introduction to Computer Science (<a href="http://www.inf.ufsc.br/~r.santiago/downloads/INE5201.pdf">PDF</a>)</li>
+          <li>INE5402 — Object-Oriented Programming I (<a href="http://www.inf.ufsc.br/~r.santiago/downloads/ineOO1_notas_v1.pdf">PDF</a>)</li>
+          <li>INE5603 — Introduction to Object-Oriented Programming (<a href="http://www.inf.ufsc.br/~r.santiago/downloads/ineOO1_notas_v1.pdf">PDF</a>)</li>
+        </ul>
+        <details class="semesters">
+          <summary>Previously taught (2018/2 – 2025/1)</summary>
+          <div class="sem-block">
+            <h4>2025/1</h4><ul><li>INE410104 — Design and Analysis of Algorithms</li><li>INE5413 — Graphs</li></ul>
+            <h4>2024/2 · 2024/1 · 2023/2 · 2023/1 · 2022/2 · 2022/1 · 2021/2</h4><ul><li>INE410104 — Design and Analysis of Algorithms</li><li>INE5413 — Graphs</li></ul>
+            <h4>2021/1 · 2020/2 · 2020/1 · 2019/2</h4><ul><li>INE410104 — Design and Analysis of Algorithms</li><li>INE5413 — Graphs</li><li>INE5622 — Introduction to Compilers</li></ul>
+            <h4>2019/1</h4><ul><li>INE410104 — Design and Analysis of Algorithms</li><li>INE5201 — Introduction to Computer Science</li><li>INE5413 — Graphs</li><li>INE5622 — Introduction to Compilers</li></ul>
+            <h4>2018/2</h4><ul><li>INE5201 — Introduction to Computer Science</li><li>INE5402 — Object-Oriented Programming I</li><li>INE5603 — Introduction to Object-Oriented Programming</li></ul>
+          </div>
+        </details>
+      </section>
+
+      <!-- ================= STUDENTS ================= -->
+      <section id="students" class="page">
+        <h2 class="section-title">Students</h2>
+        <p class="students-intro">Graduate students under supervision at PPGCC/UFSC, by degree level.</p>
+        <div class="table-scroll">
+          <table class="students">
+            <caption>Current graduate students</caption>
+            <thead>
+              <tr><th scope="col">Name</th><th scope="col">Level</th><th scope="col">Research topic</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Evandro Chagas Ribeiro da Rosa</td><td><span class="badge doutorado">Ph.D.</span></td><td>Quantum computing: high-level quantum programming and gate decomposition (Ket platform)</td></tr>
+              <tr><td>Armindo Antonio Guerra Junior</td><td><span class="badge doutorado">Ph.D.</span></td><td class="placeholder">to be filled</td></tr>
+              <tr><td>Eduardo Willwock Lussi</td><td><span class="badge doutorado">Ph.D.</span></td><td>Time optimization of robust low-latency quantum circuits</td></tr>
+              <tr><td>Andréia Aparecida Machado</td><td><span class="badge mestrado">Master's</span></td><td class="placeholder">to be filled</td></tr>
+              <tr><td>Israel Efraim de Oliveira</td><td><span class="badge mestrado">Master's</span></td><td>Generative modeling of geological facies and acoustic impedance (conditional GAN)</td></tr>
+              <tr><td>João Paulo Machado</td><td><span class="badge mestrado">Master's</span></td><td class="placeholder">to be filled</td></tr>
+              <tr><td>Renan Cavalcanti Machado do Rego Barros</td><td><span class="badge mestrado">Master's</span></td><td class="placeholder">to be filled</td></tr>
+              <tr><td>Bruno Venâncio Barbosa</td><td><span class="badge mestrado">Master's</span></td><td class="placeholder">to be filled</td></tr>
+              <tr><td>Diogo de Souza Caetano</td><td><span class="badge mestrado">Master's</span></td><td class="placeholder">to be filled</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="count-note">Total: 9 students — 3 Ph.D. and 6 Master's.</p>
+      </section>
+
+      <!-- ================= LINKS ================= -->
+      <section id="links" class="page">
+        <h2 class="section-title">Useful Links</h2>
+        <ul class="link-list">
+          <li><strong>Lattes CV:</strong> <a href="http://lattes.cnpq.br/5073911182921995">lattes.cnpq.br/5073911182921995</a></li>
+          <li><strong>ORCID:</strong> <a href="https://orcid.org/0000-0001-7033-125X">0000-0001-7033-125X</a></li>
+          <li><strong>UFSC:</strong> <a href="http://www.ufsc.br">www.ufsc.br</a></li>
+          <li><strong>Department (INE):</strong> <a href="http://ine.ufsc.br">ine.ufsc.br</a></li>
+          <li><strong>Graduate Program (PPGCC):</strong> <a href="https://ppgcc.ufsc.br/">ppgcc.ufsc.br</a></li>
+          <li><strong>Lab:</strong> Connectionism and Cognitive Science Laboratory</li>
+        </ul>
+      </section>
+
     </main>
 
     <footer class="site-footer">© 2026 · Rafael de Santiago</footer>
   </div>
+
+<script>
+  (function(){
+    var pages = document.querySelectorAll('.page');
+    var links = document.querySelectorAll('nav.main-nav a');
+    var ids = Array.prototype.map.call(pages, function(p){ return p.id; });
+
+    function show(id){
+      if (ids.indexOf(id) === -1) id = 'about';
+      pages.forEach(function(p){ p.classList.toggle('active', p.id === id); });
+      links.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#' + id); });
+      window.scrollTo(0, 0);
+    }
+    function current(){ return (location.hash || '#about').slice(1); }
+
+    window.addEventListener('hashchange', function(){ show(current()); });
+    show(current());
+  })();
+</script>
 </body>
 </html>
