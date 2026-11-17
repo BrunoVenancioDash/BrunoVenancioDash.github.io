@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L3C · Laboratório de Conexionismo e Ciências Cognitivas</title>
+<meta name="description" content="L3C – Laboratório de Conexionismo e Ciências Cognitivas · INE/UFSC">
+<meta property="og:type" content="website">
+<meta property="og:title" content="L3C · Laboratório de Conexionismo e Ciências Cognitivas">
+<meta property="og:description" content="Laboratório do INE/UFSC dedicado a redes neurais, inteligência computacional, otimização e geofísica computacional.">
+<meta property="og:url" content="https://brunovenanciodash.github.io/L3C/">
+<meta property="og:image" content="https://brunovenanciodash.github.io/L3C/img/logo_l3c.png">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "ResearchOrganization",
+ "name": "L3C – Laboratório de Conexionismo e Ciências Cognitivas",
+ "alternateName": "Connectionism and Cognitive Science Laboratory",
+ "url": "https://brunovenanciodash.github.io/L3C/",
+ "logo": "https://brunovenanciodash.github.io/L3C/img/logo_l3c.png",
+ "foundingDate": "2000-05-05",
+ "parentOrganization": {
+  "@type": "Organization",
+  "name": "Departamento de Informática e Estatística (INE) · Universidade Federal de Santa Catarina (UFSC)",
+  "url": "http://ine.ufsc.br"
+ },
+ "address": {
+  "@type": "PostalAddress",
+  "streetAddress": "INE/CTC, 4º andar, sala INE-401, Campus Reitor João David Ferreira Lima, Trindade",
+  "addressLocality": "Florianópolis",
+  "addressRegion": "SC",
+  "postalCode": "88040-900",
+  "addressCountry": "BR"
+ },
+ "member": [
+  {
+   "@type": "Person",
+   "name": "Rafael de Santiago"
+  },
+  {
+   "@type": "Person",
+   "name": "Mauro Roisenberg"
+  },
+  {
+   "@type": "Person",
+   "name": "Alexandre Gonçalves Silva"
+  },
+  {
+   "@type": "Person",
+   "name": "Eduardo Camilo Inacio"
+  },
+  {
+   "@type": "Person",
+   "name": "Tiago Mazzutti"
+  }
+ ],
+ "knowsAbout": [
+  "Redes neurais",
+  "Inteligência computacional",
+  "Inversão sísmica",
+  "Visão computacional",
+  "Otimização",
+  "Computação quântica"
+ ],
+ "sameAs": [
+  "https://l3clab.paginas.ufsc.br"
+ ]
+}
+</script>
+<script>
+  /* Aplica tema e idioma salvos antes de renderizar (evita "piscada") */
+  (function(){
+    var d = document.documentElement;
+    try{
+      var t = localStorage.getItem('l3c-theme');
+      if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
+      var l = localStorage.getItem('l3c-lang');
+      if (l === 'en' || l === 'es'){ d.setAttribute('lang', l); d.setAttribute('data-lang', l); }
+    }catch(e){}
+  })();
+</script>
+<style>
+  /* ================= TEMA ================= */
+  :root{
+    --max-width:1040px;
+    --text:#1f2328;--muted:#59636e;--accent:#1a4971;--accent-hover:#0f3556;
+    --border:#e3e6ea;--bg:#ffffff;--bg-soft:#f6f8fa;--row-hover:#fbfcfd;
+    --badge-dr-bg:#e7f0fa;--badge-dr-fg:#1a4971;
+    --badge-ms-bg:#eef7ee;--badge-ms-fg:#2e6b34;
+    --badge-gr-bg:#f3eefa;--badge-gr-fg:#5a3b8c;
+    --badge-on-bg:#e8f5ec;--badge-on-fg:#1f6b3a;
+    --ph-bg:#fff8e1;--ph-border:#d9b96b;--ph-fg:#6b551d;
+    --avatar-bg:#e7f0fa;--avatar-fg:#1a4971;
+    --serif:Georgia,"Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color-scheme:light;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --text:#e6e9ee;--muted:#9aa4b0;--accent:#7cb3e8;--accent-hover:#a9cdf2;
+      --border:#2c333c;--bg:#14181d;--bg-soft:#1c2128;--row-hover:#1a1f26;
+      --badge-dr-bg:#1d3349;--badge-dr-fg:#a9cdf2;
+      --badge-ms-bg:#1e3523;--badge-ms-fg:#9ed4a6;
+      --badge-gr-bg:#2e2540;--badge-gr-fg:#c9b3ec;
+      --badge-on-bg:#1e3523;--badge-on-fg:#9ed4a6;
+      --ph-bg:#3a3017;--ph-border:#8a7232;--ph-fg:#f0d98e;
+      --avatar-bg:#1d3349;--avatar-fg:#a9cdf2;
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --text:#e6e9ee;--muted:#9aa4b0;--accent:#7cb3e8;--accent-hover:#a9cdf2;
+    --border:#2c333c;--bg:#14181d;--bg-soft:#1c2128;--row-hover:#1a1f26;
+    --badge-dr-bg:#1d3349;--badge-dr-fg:#a9cdf2;
+    --badge-ms-bg:#1e3523;--badge-ms-fg:#9ed4a6;
+    --badge-gr-bg:#2e2540;--badge-gr-fg:#c9b3ec;
+    --badge-on-bg:#1e3523;--badge-on-fg:#9ed4a6;
+    --ph-bg:#3a3017;--ph-border:#8a7232;--ph-fg:#f0d98e;
+    --avatar-bg:#1d3349;--avatar-fg:#a9cdf2;
+    color-scheme:dark;
+  }
+
+  /* ================= IDIOMA ================= */
+  :root:not([data-lang="pt"]) [data-l="pt"],
+  :root:not([data-lang="en"]) [data-l="en"],
+  :root:not([data-lang="es"]) [data-l="es"]{display:none!important}
+
+  /* ================= BASE ================= */
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;font-family:var(--sans);font-size:17px;line-height:1.6;color:var(--text);background:var(--bg);transition:background .2s,color .2s}
+  .wrapper{max-width:var(--max-width);margin:0 auto;padding:0 20px 64px}
+  a{color:var(--accent)}
+  a:hover{color:var(--accent-hover)}
+
+  /* ================= CABEÇALHO ================= */
+  .site-header{position:relative;padding:40px 0 0;text-align:center}
+  .site-title{margin:0 0 6px;line-height:0}
+  .site-logo{width:150px;height:auto}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  /* no tema escuro, inverte o logo: texto preto vira branco e o azul continua azul */
+  :root[data-theme="dark"] .site-logo{filter:invert(1) hue-rotate(180deg)}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .site-logo{filter:invert(1) hue-rotate(180deg)}}
+
+  .banner{display:block;width:100%;height:130px;object-fit:cover;object-position:50% 30%;border-radius:6px;border:1px solid var(--border);margin:0 0 26px}
+  figure.fig{margin:22px 0 6px}
+  figure.fig img{display:block;width:100%;height:auto;border-radius:6px;border:1px solid var(--border);background:#fff}
+  figure.fig figcaption{color:var(--muted);font-size:.88rem;margin-top:8px}
+  .site-name{margin:0;font-family:var(--serif);font-size:1.1rem}
+  .site-subtitle{margin:4px 0 0;color:var(--muted);font-size:.95rem}
+
+  .toolbar{position:absolute;top:16px;right:0;display:flex;gap:8px;align-items:center}
+  .tool-btn{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;padding:0;border:1px solid var(--border);border-radius:999px;
+    background:var(--bg-soft);color:var(--text);cursor:pointer;transition:border-color .15s}
+  .tool-btn:hover{border-color:var(--accent)}
+  .tool-btn svg{width:14px;height:14px}
+  .lang-switch{display:flex;height:28px;border:1px solid var(--border);border-radius:999px;overflow:hidden;background:var(--bg-soft)}
+  .lang-switch button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:.78rem;font-weight:600;letter-spacing:.3px;padding:0 9px;cursor:pointer}
+  .lang-switch button + button{border-left:1px solid var(--border)}
+  .lang-switch button:hover{color:var(--accent)}
+  .lang-switch button[aria-pressed="true"]{background:var(--accent);color:var(--bg)}
+  .tool-btn .icon-sun{display:none}
+  :root[data-theme="dark"] .tool-btn .icon-sun{display:inline}
+  :root[data-theme="dark"] .tool-btn .icon-moon{display:none}
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]) .tool-btn .icon-sun{display:inline}
+    :root:not([data-theme="light"]) .tool-btn .icon-moon{display:none}
+  }
+
+  nav.main-nav{position:sticky;top:0;z-index:10;background:var(--bg);margin:10px 0 8px;padding:12px 0 18px;border-bottom:1px solid var(--border);text-align:center}
+  nav.main-nav ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 4px}
+  nav.main-nav a{display:inline-block;padding:4px 12px;color:var(--accent);text-decoration:none;font-size:.95rem;border-radius:4px;transition:background .15s,color .15s}
+  nav.main-nav a:hover{background:var(--bg-soft)}
+  nav.main-nav a.active{color:var(--text);font-weight:600}
+
+  /* ================= PÁGINAS ================= */
+  main{padding-top:34px}
+  .page{display:none}
+  .page.active{display:block}
+  h2.section-title{font-family:var(--serif);font-size:1.5rem;margin:0 0 18px;padding-bottom:6px}
+  h3.sub-title{font-family:var(--serif);font-size:1.15rem;margin:30px 0 10px;padding-bottom:4px;border-bottom:1px solid var(--border)}
+  .lead{font-size:1.05rem}
+  .muted{color:var(--muted)}
+  .partners{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin:6px 0 26px}
+  .partner{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:8px;overflow:hidden;text-decoration:none;color:var(--text);background:var(--bg-soft);transition:border-color .15s}
+  .partner:hover{border-color:var(--accent);color:var(--text)}
+  .p-logo{display:flex;align-items:center;justify-content:center;height:96px;padding:16px 24px;background:#fff;border-bottom:1px solid var(--border)}
+  .p-logo img{max-width:100%;max-height:100%;width:auto;height:auto}
+  .p-txt{padding:10px 14px;font-size:.88rem;color:var(--muted)}
+  .p-txt b{display:block;color:var(--text);font-size:.95rem}
+  .lk-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .lk-cols > div{border-top:2px solid var(--accent);padding-top:12px}
+  .lk-grp{font-family:var(--sans);font-size:.82rem;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin:0 0 10px;font-weight:700}
+  .lk-list{list-style:none;margin:0;padding:0}
+  .lk-list li{margin:0 0 10px}
+  .lk-lbl{display:block;font-size:.85rem;color:var(--muted)}
+  @media (max-width:720px){.lk-cols{grid-template-columns:1fr;gap:20px}}
+  .f-lbl{font-size:.82rem;font-weight:700;color:var(--muted);min-width:72px}
+  .filters{align-items:center}
+  .news{list-style:none;margin:0 0 8px;padding:0}
+  .news li{display:grid;grid-template-columns:84px 1fr;gap:12px;padding:8px 0;border-bottom:1px solid var(--border);font-size:.97rem}
+  .news .when{color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .team-photo{margin:0 auto 26px;max-width:820px}
+  .team-photo img{display:block;width:100%;height:auto;border-radius:8px;border:1px solid var(--border)}
+  .team-photo figcaption{color:var(--muted);font-size:.88rem;text-align:center;margin-top:8px}
+  .team-ph{display:flex;align-items:center;justify-content:center;height:150px;margin:0 0 22px;border:1px dashed var(--ph-border);border-radius:8px;background:var(--ph-bg);color:var(--ph-fg);font-size:.95rem}
+  .sw{padding:14px 18px;border:1px solid var(--border);border-radius:8px;background:var(--bg-soft);margin:0 0 12px}
+  .sw b{font-size:1.05rem}
+  .sw p{margin:6px 0 8px}
+  .sw a{margin-right:14px;font-size:.92rem}
+  .repo{white-space:nowrap;font-size:.86rem}
+  .map{display:block;width:100%;height:360px;border:1px solid var(--border);border-radius:8px;margin-top:4px;overflow:hidden;background:var(--bg-soft);z-index:0}
+  .map-btns{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+  .map-btn{display:inline-block;padding:5px 14px;border:1px solid var(--border);border-radius:999px;background:var(--bg-soft);color:var(--text);font-size:.88rem;font-weight:600;text-decoration:none}
+  .map-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .ph-gray{background:var(--bg-soft);border:1px dashed var(--border);color:var(--muted);padding:2px 6px;border-radius:3px;font-size:.9em}
+  .callout{margin:30px 0 0;padding:20px 24px;border-radius:10px;background:var(--bg-soft);border:1px solid var(--border)}
+  .callout h3{font-family:var(--serif);font-size:1.2rem;margin:0 0 6px}
+  .callout p{margin:0 0 10px}
+  .callout p:last-child{margin-bottom:0}
+  .info-list,.link-list{padding-left:18px}
+  .info-list li{margin:4px 0}
+  .link-list li{margin:8px 0}
+
+  .placeholder{background:var(--ph-bg);border:1px dashed var(--ph-border);color:var(--ph-fg);padding:2px 6px;border-radius:3px;font-size:.9em}
+  .note{background:var(--bg-soft);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 4px 4px 0;font-size:.92rem;color:var(--muted);margin:18px 0}
+
+  .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:26px 0}
+  .fact{border:1px solid var(--border);border-radius:6px;padding:14px 16px;background:var(--bg-soft)}
+  .fact .num{font-family:var(--serif);font-size:1.5rem;font-weight:700;line-height:1.2}
+  .fact .lbl{color:var(--muted);font-size:.85rem}
+
+  .topics{display:flex;flex-wrap:wrap;gap:8px;padding:0;list-style:none;margin:10px 0 0}
+  .topics li{border:1px solid var(--border);border-radius:999px;padding:3px 12px;font-size:.88rem;background:var(--bg-soft)}
+
+  /* Pessoas */
+  .person{display:flex;gap:22px;align-items:flex-start;padding:22px 0;border-bottom:1px solid var(--border)}
+  .person:first-of-type{padding-top:4px}
+  .person .photo{flex:0 0 140px;width:140px;height:140px;border-radius:6px;object-fit:cover;object-position:50% 25%;background:var(--bg-soft);border:1px solid var(--border)}
+  .person .photo.square{object-position:50% 50%}
+  .avatar{display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:2rem;font-weight:700;background:var(--avatar-bg)!important;color:var(--avatar-fg)}
+  .person .p-body{flex:1 1 auto;min-width:0}
+  .person h3{font-family:var(--serif);font-size:1.2rem;margin:0}
+  .person .role{color:var(--muted);font-size:.92rem;margin:2px 0 8px}
+  .person p{margin:6px 0;font-size:.96rem}
+  .person .links{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:.92rem;margin-top:8px}
+
+  /* Tabelas */
+  .table-scroll{overflow-x:auto}
+  table.tbl{width:100%;border-collapse:collapse;font-size:.95rem;margin:0 0 24px}
+  table.tbl caption{text-align:left;font-weight:600;padding:0 0 8px}
+  table.tbl th,table.tbl td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+  table.tbl thead th{background:var(--bg-soft);border-bottom:2px solid var(--border);font-size:.8rem;text-transform:uppercase;letter-spacing:.4px;color:var(--muted)}
+  table.tbl tbody tr:hover{background:var(--row-hover)}
+  .badge{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.76rem;font-weight:600;white-space:nowrap}
+  .badge.dr{background:var(--badge-dr-bg);color:var(--badge-dr-fg)}
+  .badge.ms{background:var(--badge-ms-bg);color:var(--badge-ms-fg)}
+  .badge.gr{background:var(--badge-gr-bg);color:var(--badge-gr-fg)}
+  .badge.on{background:var(--badge-on-bg);color:var(--badge-on-fg)}
+  .count-note{color:var(--muted);font-size:.9rem;margin-top:-12px}
+
+  /* Projetos e publicações */
+  .item-list{list-style:none;padding:0;margin:0}
+  .item-list li{padding:12px 0;border-bottom:1px solid var(--border);font-size:.95rem;line-height:1.5}
+  .item-list .i-title{font-weight:600}
+  .item-list .i-meta{color:var(--muted)}
+  .item-list .i-auth b{font-weight:600;color:var(--accent)}
+  .pub-year{font-family:var(--serif);font-size:1.15rem;margin:26px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--border)}
+
+  .filters{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 6px}
+  .filters button{padding:4px 12px;border:1px solid var(--border);border-radius:999px;background:var(--bg);color:var(--text);font:inherit;font-size:.85rem;cursor:pointer}
+  .filters button:hover{border-color:var(--accent)}
+  .filters button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+  .pub-count{color:var(--muted);font-size:.88rem;margin:6px 0 0}
+
+  details.more{margin-top:22px}
+  details.more summary{cursor:pointer;color:var(--accent);font-weight:600;padding:6px 0}
+
+  footer.site-footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--border);color:var(--muted);font-size:.85rem;text-align:center}
+
+  @media (max-width:560px){
+    body{font-size:16px}
+    .site-header{padding-top:74px}
+    .toolbar{left:0;right:0;justify-content:center}
+    .site-logo{width:120px}
+    .banner{height:90px}
+    .person{flex-direction:column;align-items:center;text-align:center}
+    .person .links{justify-content:center}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <header class="site-header">
+      <div class="toolbar">
+        <div class="lang-switch" role="group" aria-label="Idioma / Language / Idioma">
+          <button type="button" data-set-lang="pt" lang="pt-BR" title="Português">PT</button>
+          <button type="button" data-set-lang="en" lang="en" title="English">EN</button>
+          <button type="button" data-set-lang="es" lang="es" title="Español">ES</button>
+        </div>
+        <button class="tool-btn" id="themeToggle" type="button" aria-label="Alternar tema claro/escuro">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        </button>
+      </div>
+      <h1 class="site-title"><img class="site-logo" src="img/logo_l3c.png" width="480" height="360" alt=""><span class="sr-only">L3C</span></h1>
+      <p class="site-name">
+        <span data-l="pt">Laboratório de Conexionismo e Ciências Cognitivas</span>
+        <span data-l="en">Connectionism and Cognitive Science Lab</span><span data-l="es">Laboratorio de Conexionismo y Ciencias Cognitivas</span>
+      </p>
+      <p class="site-subtitle">
+        <span data-l="pt">Departamento de Informática e Estatística (INE) · UFSC</span>
+        <span data-l="en">Department of Informatics and Statistics (INE) · UFSC</span><span data-l="es">Departamento de Informática y Estadística (INE) · UFSC</span>
+      </p>
+    </header>
+
+    <nav class="main-nav" aria-label="Seções">
+      <ul>
+        <li><a href="#inicio"><span data-l="pt">Início</span><span data-l="en">Home</span><span data-l="es">Inicio</span></a></li>
+        <li><a href="#pesquisa"><span data-l="pt">Pesquisa</span><span data-l="en">Research</span><span data-l="es">Investigación</span></a></li>
+        <li><a href="#projetos"><span data-l="pt">Projetos</span><span data-l="en">Projects</span><span data-l="es">Proyectos</span></a></li>
+        <li><a href="#professores"><span data-l="pt">Professores</span><span data-l="en">Faculty</span><span data-l="es">Profesores</span></a></li>
+        <li><a href="#membros"><span data-l="pt">Membros</span><span data-l="en">Members</span><span data-l="es">Miembros</span></a></li>
+        <li><a href="#publicacoes"><span data-l="pt">Publicações</span><span data-l="en">Publications</span><span data-l="es">Publicaciones</span></a></li>
+        <li><a href="#contato"><span data-l="pt">Contato</span><span data-l="en">Contact</span><span data-l="es">Contacto</span></a></li>
+      </ul>
+    </nav>
+
+    <main>
+
+      <!-- ================= INÍCIO ================= -->
+      <section id="inicio" class="page">
+        <img class="banner" src="img/banner_sismica.jpg" width="1200" height="402" alt="">
+        <h2 class="section-title"><span data-l="pt">Sobre o laboratório</span><span data-l="en">About the lab</span><span data-l="es">Sobre el laboratorio</span></h2>
+
+        <div data-l="pt">
+          <p class="lead">
+            O L3C – Laboratório de Conexionismo e Ciências Cognitivas foi oficialmente fundado em
+            5 de maio de 2000, no Departamento de Informática e Estatística (INE) da Universidade
+            Federal de Santa Catarina (UFSC).
+          </p>
+          <p>
+            O laboratório reúne pesquisadores de Ciência da Computação que atuam em redes neurais
+            artificiais, computação evolutiva, teoria dos jogos e lógica. Seu objetivo é estudar a
+            emergência da cognição a partir de paradigmas inspirados na natureza, a começar pelo
+            conexionismo, construindo pontes entre as abordagens simbólica, conexionista e
+            evolutiva da Inteligência Artificial.
+          </p>
+          <p>
+            Mais do que um espaço físico de trabalho, o L3C pretende ser um grupo de pesquisadores
+            unidos por interesses comuns, sem fronteiras físicas.
+          </p>
+        </div>
+        <div data-l="en">
+          <p class="lead">
+            L3C – the Connectionism and Cognitive Science Lab – was officially founded on May 5, 2000,
+            at the Department of Informatics and Statistics (INE) of the Federal University of
+            Santa Catarina (UFSC), Brazil.
+          </p>
+          <p>
+            The lab brings together Computer Science researchers working on artificial neural
+            networks, evolutionary computation, game theory and logic. Its goal is to study the
+            emergence of cognition through nature-inspired paradigms, starting from connectionism,
+            bridging the symbolic, connectionist and evolutionary approaches to Artificial Intelligence.
+          </p>
+          <p>
+            More than a physical workplace, L3C aims to be a group of researchers bound by common
+            interests, with no physical borders.
+          </p>
+        </div><div data-l="es">
+          <p class="lead">
+            El L3C – Laboratorio de Conexionismo y Ciencias Cognitivas – fue fundado oficialmente el 5 de mayo de 2000
+            en el Departamento de Informática y Estadística (INE) de la Universidad Federal de
+            Santa Catarina (UFSC), Brasil.
+          </p>
+          <p>
+            El laboratorio reúne a investigadores de Ciencia de la Computación que trabajan en redes neuronales
+            artificiales, computación evolutiva, teoría de juegos y lógica. Su objetivo es estudiar la
+            emergencia de la cognición a partir de paradigmas inspirados en la naturaleza, comenzando por el conexionismo,
+            y tender puentes entre los enfoques simbólico, conexionista y evolutivo de la Inteligencia Artificial.
+          </p>
+          <p>
+            Más que un espacio físico de trabajo, el L3C pretende ser un grupo de investigadores unidos por
+            intereses comunes, sin fronteras físicas.
+          </p>
+        </div>
+
+        <div class="facts">
+          <div class="fact"><div class="num">2000</div><div class="lbl"><span data-l="pt">Ano de fundação</span><span data-l="en">Founded</span><span data-l="es">Año de fundación</span></div></div>
+          <div class="fact"><div class="num" id="nProf">5</div><div class="lbl"><span data-l="pt">Professores</span><span data-l="en">Faculty members</span><span data-l="es">Profesores</span></div></div>
+          <div class="fact"><div class="num" id="nProj">12</div><div class="lbl"><span data-l="pt">Projetos desde 2000</span><span data-l="en">Projects since 2000</span><span data-l="es">Proyectos desde 2000</span></div></div>
+          <div class="fact"><div class="num">INE · CTC</div><div class="lbl"><span data-l="pt">4º andar, UFSC Trindade</span><span data-l="en">4th floor, UFSC Trindade</span><span data-l="es">4.º piso, UFSC Trindade</span></div></div>
+        </div>
+
+        <div id="newsBlock">
+          <h3 class="sub-title"><span data-l="pt">Notícias</span><span data-l="en">News</span><span data-l="es">Noticias</span></h3>
+          <ul class="news" id="newsList"></ul>
+        </div>
+
+        <h3 class="sub-title"><span data-l="pt">Parcerias</span><span data-l="en">Partners</span><span data-l="es">Alianzas</span></h3>
+        <div class="partners">
+          <a class="partner" target="_blank" rel="noopener" href="https://petrobras.com.br/">
+            <span class="p-logo"><img src="img/logo_petrobras.svg" width="500" height="98" alt="Petrobras" loading="lazy"></span>
+            <span class="p-txt"><b>Petrobras · CENPES</b><span data-l="pt">Projeto Caracterização 4D de Reservatórios</span><span data-l="en">4D Reservoir Characterization project</span><span data-l="es">Proyecto Caracterización 4D de Yacimientos</span></span>
+          </a>
+          <a class="partner" target="_blank" rel="noopener" href="https://www.ltrace.com.br/">
+            <span class="p-logo"><img src="img/logo_ltrace.png" width="498" height="221" alt="LTrace Geosciences" loading="lazy"></span>
+            <span class="p-txt"><b>LTrace Geosciences</b>ltrace.com.br</span>
+          </a>
+        </div>
+
+        <div class="callout">
+          <h3><span data-l="pt">Quer participar?</span><span data-l="en">Want to join?</span><span data-l="es">¿Quieres participar?</span></h3>
+          <p data-l="pt">Estudantes interessados em iniciação científica, TCC, mestrado ou doutorado são bem-vindos. Entre em contato com qualquer um dos <a href="#professores">professores do laboratório</a>.</p>
+          <p data-l="en">Students interested in undergraduate research, an undergraduate thesis, or a Master's or Ph.D. degree are welcome. Get in touch with any of the <a href="#professores">lab's faculty members</a>.</p>
+          <p data-l="es">Los estudiantes interesados en iniciación científica, trabajo de fin de grado, maestría o doctorado son bienvenidos. Ponte en contacto con cualquiera de los <a href="#professores">profesores del laboratorio</a>.</p>
+        </div>
+      </section>
+
+      <!-- ================= PESQUISA ================= -->
+      <section id="pesquisa" class="page">
+        <h2 class="section-title"><span data-l="pt">Pesquisa</span><span data-l="en">Research</span><span data-l="es">Investigación</span></h2>
+        <p data-l="pt">
+          A pesquisa do L3C parte do conexionismo e da inteligência computacional e se estende à
+          visão computacional e ao processamento de imagens, com
+          destaque para aplicações em geociências, como a caracterização de reservatórios de petróleo
+          e a inversão sísmica.
+        </p>
+        <p data-l="en">
+          L3C's research starts from connectionism and computational intelligence and extends to
+          computer vision and image processing, with
+          a strong focus on geoscience applications such as petroleum reservoir characterization
+          and seismic inversion.
+        </p><p data-l="es">
+          La investigación del L3C parte del conexionismo y de la inteligencia computacional y se extiende a la
+          visión por computadora y el procesamiento de imágenes, con
+          especial énfasis en aplicaciones en geociencias, como la caracterización de yacimientos de petróleo
+          y la inversión sísmica.
+        </p>
+
+        <h3 class="sub-title"><span data-l="pt">Linhas de pesquisa</span><span data-l="en">Research lines</span><span data-l="es">Líneas de investigación</span></h3>
+        <ul class="info-list" data-l="pt">
+          <li><strong>Redes neurais e aprendizado de máquina</strong>: redes neurais artificiais, modelos generativos (GANs, VAEs) e redes neurais informadas pela física (PINNs).</li>
+          <li><strong>Geofísica computacional</strong>: inversão sísmica, estimativa de incertezas, física de rochas, modelagem de fácies e propriedades petrofísicas.</li>
+          <li><strong>Visão computacional e processamento de imagens</strong>: morfologia matemática, segmentação e classificação de imagens médicas, sísmicas e de sensoriamento remoto.</li>
+          <li><strong>IA neuro-simbólica e agentes</strong>: integração entre raciocínio simbólico e redes neurais e agentes BDI.</li>
+        </ul>
+        <ul class="info-list" data-l="en">
+          <li><strong>Neural networks and machine learning</strong>: artificial neural networks, generative models (GANs, VAEs) and physics-informed neural networks (PINNs).</li>
+          <li><strong>Computational geophysics</strong>: seismic inversion, uncertainty estimation, rock physics, facies and petrophysical property modeling.</li>
+          <li><strong>Computer vision and image processing</strong>: mathematical morphology, segmentation and classification of medical, seismic and remote-sensing images.</li>
+          <li><strong>Neural-symbolic AI and agents</strong>: integrating symbolic reasoning and neural networks, BDI agents.</li>
+        </ul><ul class="info-list" data-l="es">
+          <li><strong>Redes neuronales y aprendizaje automático</strong>: redes neuronales artificiales, modelos generativos (GANs, VAEs) y redes neuronales informadas por la física (PINNs).</li>
+          <li><strong>Geofísica computacional</strong>: inversión sísmica, estimación de incertidumbre, física de rocas, modelado de facies y de propiedades petrofísicas.</li>
+          <li><strong>Visión por computadora y procesamiento de imágenes</strong>: morfología matemática, segmentación y clasificación de imágenes médicas, sísmicas y de teledetección.</li>
+          <li><strong>IA neuro-simbólica y agentes</strong>: integración entre razonamiento simbólico y redes neuronales, agentes BDI.</li>
+        </ul>
+
+        <h3 class="sub-title">Software</h3>
+        <div id="swList"></div>
+
+        <h3 class="sub-title"><span data-l="pt">Palavras-chave</span><span data-l="en">Keywords</span><span data-l="es">Palabras clave</span></h3>
+        <ul class="topics" data-l="pt">
+          <li>Conexionismo</li><li>Ciências cognitivas</li><li>Redes neurais</li>
+          <li>Teoria dos jogos</li><li>Lógica</li>
+          <li>Inversão sísmica</li><li>Caracterização de reservatórios</li>
+          <li>Visão computacional</li>
+        </ul>
+        <ul class="topics" data-l="en">
+          <li>Connectionism</li><li>Cognitive science</li><li>Neural networks</li>
+          <li>Game theory</li><li>Logic</li>
+          <li>Seismic inversion</li><li>Reservoir characterization</li>
+          <li>Computer vision</li>
+        </ul><ul class="topics" data-l="es">
+          <li>Conexionismo</li><li>Ciencias cognitivas</li><li>Redes neuronales</li>
+          <li>Teoría de juegos</li><li>Lógica</li>
+          <li>Inversión sísmica</li><li>Caracterización de yacimientos</li>
+          <li>Visión por computadora</li>
+        </ul>
+      </section>
+
+      <!-- ================= PROJETOS ================= -->
+      <section id="projetos" class="page">
+        <h2 class="section-title"><span data-l="pt">Projetos</span><span data-l="en">Projects</span><span data-l="es">Proyectos</span></h2>
+
+        <h3 class="sub-title"><span data-l="pt">Projeto ativo</span><span data-l="en">Active project</span><span data-l="es">Proyecto activo</span></h3>
+        <ul class="item-list" id="projAtivos"></ul>
+
+        <figure class="fig">
+          <img src="img/fundo_LI_l3c.jpeg" width="1045" height="1009" loading="lazy"
+               alt="Duas seções sísmicas coloridas, A e B, mostrando camadas geológicas curvadas entre 3450 e 3800 ms.">
+          <figcaption>
+            <span data-l="pt">Legenda: a ver</span><span data-l="en">Caption: to be confirmed</span><span data-l="es">Leyenda: por confirmar</span>
+          </figcaption>
+        </figure>
+
+        <h3 class="sub-title"><span data-l="pt">Projetos anteriores</span><span data-l="en">Past projects</span><span data-l="es">Proyectos anteriores</span></h3>
+        <ul class="item-list" id="projAnteriores"></ul>
+      </section>
+
+      <!-- ================= PROFESSORES ================= -->
+      <section id="professores" class="page">
+        <h2 class="section-title"><span data-l="pt">Professores</span><span data-l="en">Faculty</span><span data-l="es">Profesores</span></h2>
+
+        <div id="profList"></div>
+      </section>
+
+      <!-- ================= MEMBROS ================= -->
+      <section id="membros" class="page">
+        <h2 class="section-title"><span data-l="pt">Membros</span><span data-l="en">Members</span><span data-l="es">Miembros</span></h2>
+        <div id="teamPhoto"></div>
+        <p class="muted"><span data-l="pt">Estudantes de pós-graduação do PPGCC/UFSC vinculados ao laboratório.</span><span data-l="en">PPGCC/UFSC graduate students affiliated with the lab.</span><span data-l="es">Estudiantes de posgrado del PPGCC/UFSC vinculados al laboratorio.</span></p>
+
+        <div class="table-scroll">
+          <table class="tbl">
+            <caption><span data-l="pt">Estudantes atuais</span><span data-l="en">Current students</span><span data-l="es">Estudiantes actuales</span></caption>
+            <thead>
+              <tr>
+                <th scope="col"><span data-l="pt">Nome</span><span data-l="en">Name</span><span data-l="es">Nombre</span></th>
+                <th scope="col"><span data-l="pt">Nível</span><span data-l="en">Level</span><span data-l="es">Nivel</span></th>
+                <th scope="col"><span data-l="pt">Orientação</span><span data-l="en">Advisor</span><span data-l="es">Director</span></th>
+                <th scope="col"><span data-l="pt">Tema</span><span data-l="en">Topic</span><span data-l="es">Tema</span></th>
+              </tr>
+            </thead>
+            <tbody id="estRows"></tbody>
+          </table>
+        </div>
+        <p class="count-note" id="estCount"></p>
+        <p class="note"><span data-l="pt">Orientandos dos demais professores:</span><span data-l="en">Students advised by other faculty members:</span><span data-l="es">Estudiantes dirigidos por los demás profesores:</span> <span class="placeholder"><span data-l="pt">a preencher</span><span data-l="en">to be filled</span><span data-l="es">por completar</span></span></p>
+
+        <div class="table-scroll" style="margin-top:28px">
+          <table class="tbl">
+            <caption><span data-l="pt">Pesquisadores e colaboradores do projeto 4D</span><span data-l="en">Researchers and collaborators of the 4D project</span><span data-l="es">Investigadores y colaboradores del proyecto 4D</span>
+              <span class="muted" style="font-weight:400">(<span data-l="pt">Caracterização Quantitativa Integrada 4D de Reservatórios</span><span data-l="en">Integrated Quantitative 4D Reservoir Characterization</span><span data-l="es">Caracterización Cuantitativa Integrada 4D de Yacimientos</span>, Petrobras/CENPES)</span></caption>
+            <thead><tr><th scope="col"><span data-l="pt">Nome</span><span data-l="en">Name</span><span data-l="es">Nombre</span></th><th scope="col"><span data-l="pt">Função</span><span data-l="en">Role</span><span data-l="es">Función</span></th></tr></thead>
+            <tbody id="equipeRows"></tbody>
+          </table>
+        </div>
+
+        <details class="more">
+          <summary><span data-l="pt">Ex-membros (registro de 2019)</span><span data-l="en">Former members (2019 record)</span><span data-l="es">Exmiembros (registro de 2019)</span></summary>
+          <div class="table-scroll" style="margin-top:12px">
+            <table class="tbl">
+              <thead>
+                <tr><th scope="col"><span data-l="pt">Nome</span><span data-l="en">Name</span><span data-l="es">Nombre</span></th><th scope="col"><span data-l="pt">Função à época</span><span data-l="en">Role at the time</span><span data-l="es">Función en ese momento</span></th><th scope="col"><span data-l="pt">Onde está agora</span><span data-l="en">Where they are now</span><span data-l="es">Dónde está ahora</span></th></tr>
+              </thead>
+              <tbody id="exRows"></tbody>
+            </table>
+          </div>
+        </details>
+        <div class="table-scroll" style="margin-top:28px">
+          <table class="tbl">
+            <caption><span data-l="pt">Teses e dissertações concluídas (desde 2018)</span><span data-l="en">Completed theses and dissertations (since 2018)</span><span data-l="es">Tesis y disertaciones concluidas (desde 2018)</span></caption>
+            <thead><tr><th scope="col"><span data-l="pt">Ano</span><span data-l="en">Year</span><span data-l="es">Año</span></th><th scope="col"><span data-l="pt">Nome</span><span data-l="en">Name</span><span data-l="es">Nombre</span></th><th scope="col"><span data-l="pt">Nível</span><span data-l="en">Level</span><span data-l="es">Nivel</span></th><th scope="col"><span data-l="pt">Orientação</span><span data-l="en">Advisor</span><span data-l="es">Director</span></th><th scope="col"><span data-l="pt">Título</span><span data-l="en">Title</span><span data-l="es">Título</span></th></tr></thead>
+            <tbody id="tesesRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= PUBLICAÇÕES ================= -->
+      <section id="publicacoes" class="page">
+        <h2 class="section-title"><span data-l="pt">Publicações</span><span data-l="en">Publications</span><span data-l="es">Publicaciones</span></h2>
+        <p class="muted">
+          <span data-l="pt">Artigos e trabalhos em eventos dos professores do laboratório desde 2021. Nomes dos professores do L3C em destaque.</span>
+          <span data-l="en">Journal and conference papers by the lab's faculty since 2021. L3C faculty names are highlighted.</span><span data-l="es">Artículos y trabajos en congresos de los profesores del laboratorio desde 2021. Los nombres de los profesores del L3C aparecen destacados.</span>
+        </p>
+
+        <div class="filters" id="pubFilters" role="group" aria-label="Filtrar por professor"><span class="f-lbl"><span data-l="pt">Professor:</span><span data-l="en">Faculty:</span><span data-l="es">Profesor:</span></span></div>
+        <div class="filters" id="tipoFilters" role="group" aria-label="Filtrar por tipo"><span class="f-lbl"><span data-l="pt">Tipo:</span><span data-l="en">Type:</span><span data-l="es">Tipo:</span></span></div>
+        <p class="pub-count" id="pubCount" aria-live="polite"></p>
+
+        <div id="pubList"></div>
+
+        <p class="note">
+          <span data-l="pt">Para a produção completa, consulte o Lattes ou o ORCID de cada professor na página</span>
+          <span data-l="en">For complete publication lists, see each faculty member's Lattes or ORCID on the</span><span data-l="es">Para la producción completa, consulta el Lattes o el ORCID de cada profesor en la página de</span>
+          <a href="#professores"><span data-l="pt">Professores</span><span data-l="en">Faculty page</span><span data-l="es">Profesores</span></a>.
+        </p>
+      </section>
+
+      <!-- ================= CONTATO ================= -->
+      <section id="contato" class="page">
+        <h2 class="section-title"><span data-l="pt">Contato</span><span data-l="en">Contact</span><span data-l="es">Contacto</span></h2>
+        <div class="lk-cols">
+          <div>
+            <h3 class="lk-grp"><span data-l="pt">Contato</span><span data-l="en">Contact</span><span data-l="es">Contacto</span></h3>
+            <ul class="lk-list">
+              <li><span class="lk-lbl"><span data-l="pt">Coordenação</span><span data-l="en">Coordinator</span><span data-l="es">Coordinación</span></span>Prof. Rafael de Santiago<br>r.santiago <em>at</em> ufsc.br</li>
+              <li><span class="lk-lbl"><span data-l="pt">Sala</span><span data-l="en">Room</span><span data-l="es">Sala</span></span>INE-401 · INE/CTC, <span data-l="pt">4º andar</span><span data-l="en">4th floor</span><span data-l="es">4.º piso</span></li>
+              <li><span class="lk-lbl"><span data-l="pt">Endereço</span><span data-l="en">Address</span><span data-l="es">Dirección</span></span>Campus Reitor João David Ferreira Lima, Trindade, Florianópolis/SC, <span data-l="pt">Brasil</span><span data-l="en">Brazil</span><span data-l="es">Brasil</span> — CEP 88040-900</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="lk-grp"><span data-l="pt">Redes sociais</span><span data-l="en">Social media</span><span data-l="es">Redes sociales</span></h3>
+            <ul class="lk-list">
+              <li><span class="lk-lbl">Facebook</span><a target="_blank" rel="noopener" href="https://www.facebook.com/l3clab/">facebook.com/l3clab</a></li>
+              <li><span class="lk-lbl">LinkedIn</span><a target="_blank" rel="noopener" href="https://www.linkedin.com/company/l3clab/">linkedin.com/company/l3clab</a></li>
+              <li><span class="lk-lbl"><span data-l="pt">Site anterior</span><span data-l="en">Previous website</span><span data-l="es">Sitio anterior</span></span><a target="_blank" rel="noopener" href="https://l3clab.paginas.ufsc.br/">l3clab.paginas.ufsc.br</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="lk-grp"><span data-l="pt">Instituições</span><span data-l="en">Institutions</span><span data-l="es">Instituciones</span></h3>
+            <ul class="lk-list">
+              <li><span class="lk-lbl"><span data-l="pt">Universidade (UFSC)</span><span data-l="en">University (UFSC)</span><span data-l="es">Universidad (UFSC)</span></span><a target="_blank" rel="noopener" href="https://ufsc.br">ufsc.br</a></li>
+              <li><span class="lk-lbl"><span data-l="pt">Departamento (INE)</span><span data-l="en">Department (INE)</span><span data-l="es">Departamento (INE)</span></span><a target="_blank" rel="noopener" href="https://ine.ufsc.br">ine.ufsc.br</a></li>
+              <li><span class="lk-lbl"><span data-l="pt">Pós-Graduação (PPGCC)</span><span data-l="en">Graduate Program (PPGCC)</span><span data-l="es">Posgrado (PPGCC)</span></span><a target="_blank" rel="noopener" href="https://ppgcc.ufsc.br/">ppgcc.ufsc.br</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- Mapa (Google Maps + botões). Para remover: apague este bloco até "fim do mapa". -->
+        <h3 class="sub-title"><span data-l="pt">Como chegar</span><span data-l="en">How to get here</span><span data-l="es">Cómo llegar</span></h3>
+        <iframe class="map" src="https://maps.google.com/maps?q=INE%20-%20Departamento%20de%20Inform%C3%A1tica%20e%20Estat%C3%ADstica%2C%20UFSC%2C%20Florian%C3%B3polis&amp;z=16&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa: INE/UFSC"></iframe>
+        <div class="map-btns">
+          <a class="map-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=INE%20-%20Departamento%20de%20Inform%C3%A1tica%20e%20Estat%C3%ADstica%2C%20UFSC%2C%20Florian%C3%B3polis"><span data-l="pt">Abrir no Google Maps</span><span data-l="en">Open in Google Maps</span><span data-l="es">Abrir en Google Maps</span></a>
+          <a class="map-btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&amp;destination=INE%20-%20Departamento%20de%20Inform%C3%A1tica%20e%20Estat%C3%ADstica%2C%20UFSC%2C%20Florian%C3%B3polis"><span data-l="pt">Como chegar (rota)</span><span data-l="en">Get directions</span><span data-l="es">Cómo llegar (ruta)</span></a>
+          <a class="map-btn" target="_blank" rel="noopener" href="https://www.openstreetmap.org/?mlat=-27.6005805&amp;mlon=-48.5186577#map=17/-27.6005805/-48.5186577"><span data-l="pt">Ver no OpenStreetMap</span><span data-l="en">View on OpenStreetMap</span><span data-l="es">Ver en OpenStreetMap</span></a>
+        </div>
+        <!-- fim do mapa -->
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      © 2026 · L3C ·
+      <span data-l="pt">Laboratório de Conexionismo e Ciências Cognitivas</span><span data-l="en">Connectionism and Cognitive Science Lab</span><span data-l="es">Laboratorio de Conexionismo y Ciencias Cognitivas</span>
+      · INE/UFSC<span id="updated"></span>
+    </footer>
+  </div>
+
+<script src="dados.js"></script>
+<script src="render.js"></script>
+<script>
+  /* ================= NAVEGAÇÃO (hash) ================= */
+  (function(){
+    var pages = document.querySelectorAll('.page');
+    var links = document.querySelectorAll('nav.main-nav a');
+    var ids = Array.prototype.map.call(pages, function(p){ return p.id; });
+
+    function show(id){
+      if (ids.indexOf(id) === -1) id = 'inicio';
+      pages.forEach(function(p){ p.classList.toggle('active', p.id === id); });
+      links.forEach(function(a){
+        var on = a.getAttribute('href') === '#' + id;
+        a.classList.toggle('active', on);
+        if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+      });
+      window.scrollTo(0, 0);
+    }
+    function current(){ return (location.hash || '#inicio').slice(1); }
+
+    window.addEventListener('hashchange', function(){ show(current()); });
+    /* o navegador rola até a âncora ao carregar; volta ao topo para mostrar o cabeçalho */
+    window.addEventListener('load', function(){ setTimeout(function(){ window.scrollTo(0, 0); }, 0); });
+    show(current());
+  })();
+
+  /* ================= IDIOMA E TEMA ================= */
+  (function(){
+    var root = document.documentElement;
+    var themeBtn = document.getElementById('themeToggle');
+    var langBtns = document.querySelectorAll('.lang-switch button');
+    var mq = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+    var TITLES = {
+      pt: 'L3C · Laboratório de Conexionismo e Ciências Cognitivas',
+      en: 'L3C · Connectionism and Cognitive Science Lab',
+      es: 'L3C · Laboratorio de Conexionismo y Ciencias Cognitivas'
+    };
+    var THEME_TIP = {
+      pt: ['Mudar para tema escuro', 'Mudar para tema claro'],
+      en: ['Switch to dark theme', 'Switch to light theme'],
+      es: ['Cambiar a tema oscuro', 'Cambiar a tema claro']
+    };
+
+    function lang(){ var l = root.getAttribute('data-lang'); return TITLES[l] ? l : 'pt'; }
+    function theme(){
+      var t = root.getAttribute('data-theme');
+      if (t === 'light' || t === 'dark') return t;
+      return (mq && mq.matches) ? 'dark' : 'light';
+    }
+    function refresh(){
+      var dark = theme() === 'dark', l = lang();
+      themeBtn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+      themeBtn.title = THEME_TIP[l][dark ? 1 : 0];
+      themeBtn.setAttribute('aria-label', themeBtn.title);
+      langBtns.forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-set-lang') === l ? 'true' : 'false'); });
+      document.title = TITLES[l];
+    }
+
+    themeBtn.addEventListener('click', function(){
+      var next = theme() === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try{ localStorage.setItem('l3c-theme', next); }catch(e){}
+      refresh();
+    });
+    langBtns.forEach(function(b){
+      b.addEventListener('click', function(){
+        var l = b.getAttribute('data-set-lang');
+        root.setAttribute('data-lang', l);
+        root.setAttribute('lang', l === 'pt' ? 'pt-BR' : l);
+        try{ localStorage.setItem('l3c-lang', l); }catch(e){}
+        refresh();
+      });
+    });
+    if (mq && mq.addEventListener) mq.addEventListener('change', refresh);
+    refresh();
+  })();
+</script>
+</body>
+</html>

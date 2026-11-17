@@ -1,0 +1,12 @@
+# Tudo que não deve ser publicado fica nas pastas nogo/
+L3C/nogo/
+rsantiago/nogo/
+
+# Material de apoio na raiz (uso local)
+base_prof.md
+PENDENCIAS.md
+_previa/
+
+# Arquivos de sistema/editor
+.DS_Store
+*~
